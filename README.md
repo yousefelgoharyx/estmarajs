@@ -76,7 +76,7 @@ Let's explore this object.
 ```js
 {
     watch: {name: ''},
-    touched: {name: true},
+    touched: {},
     errors: {}
 }
 ```
