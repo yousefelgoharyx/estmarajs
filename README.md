@@ -21,15 +21,14 @@ $ yarn add estmarajs
 You will learn the basic of the library through the following example.
 
 ```js
-import React from "react";
-import { useForm, Feild, EstmaraContext as Form } from "estmarajs";
+import React from 'react';
+import { useForm, Feild, EstmaraContext as Form } from 'estmarajs';
 function App() {
-
     const [mySweetForm, contextData] = useForm({
         username: {
             type: 'input',
             between: [3, 16],
-            message: 'Username feild\'s must be between 3 and 16 characters'
+            message: "Username feild's must be between 3 and 16 characters"
         },
         password: ''
     });
@@ -42,7 +41,7 @@ function App() {
                 <input type="text" />
             </Feild>
             {mySweetForm.errors.username ? mySweet.errors.username.message : ''}
-            
+
             <Feild model="password">
                 <input type="password" />
             </Feild>
@@ -50,13 +49,17 @@ function App() {
 
             <button onClick={onSubmit}></button>
         </Form>
-    )
+    );
 }
 ```
 
+First you need to wrap all of your form component into a component called `EstmaraContext` then pass the `contextData` which is returned from `useFrom` to a property called state
+
 So as you can see in the object within `useForm`, the property name is the model which you're gonna provide to a field later and the value can be either object or string, if it's an object that means you intend to validate this feild if not it'll behave as a regular input
 
-but what does `useForm` return anyway, well in our example it'll return this object
+but what does `useForm` return anyway, well in our example it'll return two object, you just need to focus on the first one.
+
+let's break it down!
 
 ```js
 {
@@ -65,9 +68,11 @@ but what does `useForm` return anyway, well in our example it'll return this obj
     errors: {}
 }
 ```
-Let's explore this object. 
+
+Let's explore this object.
 
 `watch` has the exact value of each input with its model name as a property name
+
 ```js
 {
     watch: {name: ''},
@@ -77,6 +82,7 @@ Let's explore this object.
 ```
 
 `touched` tells you whether a certain input was touched or not, it can be either true or false
+
 ```js
 {
     watch: {name: ''},
@@ -96,7 +102,6 @@ Let's explore this object.
 ```
 
 finally, the `handleSubmit` function, you just pass the `contextData` and it'll return the errors object and the form will re-render as well
-
 
 Now look at the table below to know which validation we provide
 
