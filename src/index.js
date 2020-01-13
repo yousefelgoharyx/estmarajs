@@ -1,8 +1,8 @@
 import { EstmaraContext } from './context';
-import { Input } from './components';
+import { Feild } from './components';
 import { useForm } from './useForm';
 import { handleSubmit } from './handleSubmit';
 
-export { EstmaraContext, Input, useForm, handleSubmit };
+export { EstmaraContext, Feild, useForm, handleSubmit };
 
 // start from useForm file!

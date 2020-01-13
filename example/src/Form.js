@@ -1,60 +1,73 @@
 import React from 'react';
-import { useForm, EstmaraContext as Form, Input } from 'estmarajs';
+import {
+    useForm,
+    EstmaraContext as Form,
+    Feild,
+    handleSubmit
+} from 'estmarajs';
 
 const FormInput = props => (
-    <div class="form__group">
-        <Input
-            model={props.model}
-            className={`form__input${props.valid ? ' error' : ''}`}
-            type={props.type}
-            placeholder={props.label}
-        />
+    <div className="form__group">
+        <Feild model={props.model}>
+            <input
+                className={`form__input${props.valid ? ' error' : ''}`}
+                type={props.type}
+                placeholder={props.label}
+            />
+        </Feild>
         {props.valid ? props.valid.message : ''}
     </div>
 );
 
-const FormButton = () => (
-    <div class="form__group">
-        <button class="btn btn--green" type="submit">
+const FormButton = props => (
+    <div className="form__group">
+        <button className="btn btn--green" {...props}>
             Next step &rarr;
         </button>
     </div>
 );
 
 const Heading = ({ marginSize }) => (
-    <div class={`mb-${marginSize}`}>
-        <h2 class="heading-secondary">Start booking now</h2>
+    <div className={`mb-${marginSize}`}>
+        <h2 className="heading-secondary">Start booking now</h2>
     </div>
 );
 
 const RegisterForm = () => {
     const [mysweetform, contextData] = useForm({
         name: {
+            type: 'input',
             between: [3, 16],
             message: 'name is invalid'
         },
-        username: {
-            between: [6, 16],
-            message: 'username is invalid'
+        select: {
+            type: 'select',
+            required: true,
+            message: 'Select 1 thing at least'
         },
-        password: {
-            between: [8, 16],
-            message: 'password is invalid'
+        radio: {
+            type: 'radio',
+            required: true,
+            message: 'Select'
         },
-        email: {
-            between: [5, 16],
-            email: true,
-            message: 'email is invalid'
+        check: {
+            type: 'checkbox',
+            required: true,
+            message: 'Select 1 thing at least'
         }
     });
-    console.log(mysweetform);
+    console.log(contextData[0]);
 
+    const onSubmit = () => {
+        const errors = handleSubmit(contextData);
+        console.log(errors);
+    };
     return (
         <section className="section-book">
             <div className="row">
                 <div className="book">
                     <Form state={contextData}>
-                        <div class="book__form">
+                        <div className="book__form">
                             <Heading marginSize="medium" />
                             <FormInput
                                 model="name"
@@ -62,25 +75,25 @@ const RegisterForm = () => {
                                 label="Name"
                                 valid={mysweetform.errors.name}
                             />
-                            <FormInput
-                                model="username"
-                                type="text"
-                                label="Username"
-                                valid={mysweetform.errors.username}
-                            />
-                            <FormInput
-                                model="password"
-                                type="password"
-                                label="Password"
-                                valid={mysweetform.errors.password}
-                            />
-                            <FormInput
-                                model="email"
-                                type="email"
-                                label="E-mail"
-                                valid={mysweetform.errors.email}
-                            />
-                            <FormButton />
+
+                            <Feild model="select">
+                                <select>
+                                    <option value="">Select</option>
+                                    <option value="Apple">Apple</option>
+                                    <option value="Banana">Banana</option>
+                                </select>
+                            </Feild>
+                            <Feild model="radio">
+                                <input type="radio" value="op1" />
+                            </Feild>
+
+                            <Feild model="check">
+                                <input type="checkbox" />
+                            </Feild>
+                            {mysweetform.errors.check
+                                ? 'fuck you check it!'
+                                : ''}
+                            <FormButton onClick={onSubmit} />
                         </div>
                     </Form>
                 </div>

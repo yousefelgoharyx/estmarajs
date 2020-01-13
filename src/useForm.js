@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { validate } from './validate';
 
 const injectConfig = config => {
     // Make a copy from the config
@@ -22,22 +21,27 @@ const injectConfig = config => {
             // Store message value
             const errorMessage = configObject.message || '';
 
+            // Store message value
+            const type = configObject.type;
+
             // assign the current object to just the input value
             nextConfig[key] = inputValue;
 
             // Delete them from the config object
             delete configObject.value;
             delete configObject.message;
+            delete configObject.type;
 
             // store both params and validity objects in the validation object
             validation[key] = {
                 $params: { ...configObject },
-                validity: { ...configObject },
-                errorMessage: errorMessage
+                validity: {},
+                errorMessage: errorMessage,
+                type: type
             };
 
-            // Validate the object
-            validation[key] = validate(validation[key], inputValue);
+            // // Validate the object
+            // validation[key] = validate(validation[key], inputValue);
         }
     });
 

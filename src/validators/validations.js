@@ -11,7 +11,7 @@ function isValidBetween(value, arr) {
 }
 
 function isValidRequired(value) {
-    return value.trim() !== "";
+    return value.trim() !== '';
 }
 
 function isValidEmail(value) {
@@ -31,25 +31,25 @@ function isValidFloat(value) {
 
 function isValidUrl(value) {
     const pattern = new RegExp(
-        "^(https?:\\/\\/)?" + // protocol
-        "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-        "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
-        "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
-        "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
-            "(\\#[-a-z\\d_]*)?$",
-        "i"
+        '^(https?:\\/\\/)?' + // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+            '(\\#[-a-z\\d_]*)?$',
+        'i'
     );
     return !!pattern.test(value);
 }
 
-const validation = {
-    isValidMinLength,
-    isValidMaxLength,
-    isValidRequired,
-    isValidEmail,
-    isValidNumber,
-    isValidFloat,
-    isValidUrl,
-    isValidBetween
+const inputCheckers = {
+    minLength: isValidMinLength,
+    maxLength: isValidMaxLength,
+    required: isValidRequired,
+    email: isValidEmail,
+    number: isValidNumber,
+    float: isValidFloat,
+    url: isValidUrl,
+    between: isValidBetween
 };
-export default validation;
+export default { inputCheckers };
