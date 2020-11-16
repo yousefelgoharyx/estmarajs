@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const injectConfig = config => {
+const injectConfig = (config) => {
     // Make a copy from the config
     const nextConfig = { ...config };
 
@@ -10,7 +10,7 @@ const injectConfig = config => {
     // initiate the errors object
     const errors = {};
 
-    Object.keys(nextConfig).forEach(key => {
+    Object.keys(nextConfig).forEach((key) => {
         if (typeof nextConfig[key] === 'object') {
             // make a copy of each object in the config
             const configObject = { ...nextConfig[key] };
@@ -37,7 +37,7 @@ const injectConfig = config => {
                 $params: { ...configObject },
                 validity: {},
                 errorMessage: errorMessage,
-                type: type
+                type: type,
             };
 
             // // Validate the object
@@ -49,7 +49,7 @@ const injectConfig = config => {
         watch: nextConfig,
         validation: validation,
         touched: {},
-        errors: errors
+        errors: errors,
     };
 };
 
@@ -58,7 +58,7 @@ export const useForm = (config, options) => {
     const returnedObject = {
         watch: state.watch,
         touched: state.touched,
-        errors: state.errors
+        errors: state.errors,
     };
     // if (options.advanced) returnedObject.validation = state.validation;
     const returned = [returnedObject, [state, setstate]];

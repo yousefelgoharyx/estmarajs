@@ -3,10 +3,10 @@ import {
     useForm,
     EstmaraContext as Form,
     Feild,
-    handleSubmit
+    handleSubmit,
 } from 'estmarajs';
 
-const FormInput = props => (
+const FormInput = (props) => (
     <div className="form__group">
         <Feild model={props.model}>
             <input
@@ -19,7 +19,7 @@ const FormInput = props => (
     </div>
 );
 
-const FormButton = props => (
+const FormButton = (props) => (
     <div className="form__group">
         <button className="btn btn--green" {...props}>
             Next step &rarr;
@@ -38,30 +38,25 @@ const RegisterForm = () => {
         name: {
             type: 'input',
             between: [3, 16],
-            message: 'name is invalid'
+            message: 'Name must be between 3 and 16 characters',
+        },
+        password: {
+            type: 'input',
+            between: [8, 16],
+            message: 'Name must be between 8 and 16 characters',
         },
         select: {
             type: 'select',
             required: true,
-            message: 'Select 1 thing at least'
+            message: 'Select 1 thing at leasts',
         },
-        radio: {
-            type: 'radio',
-            required: true,
-            message: 'Select'
-        },
-        check: {
-            type: 'checkbox',
-            required: true,
-            message: 'Select 1 thing at least'
-        }
     });
-    console.log(contextData[0]);
 
     const onSubmit = () => {
-        const errors = handleSubmit(contextData);
-        console.log(errors);
+        handleSubmit(contextData);
     };
+    console.log(mysweetform);
+    console.log(contextData);
     return (
         <section className="section-book">
             <div className="row">
@@ -76,6 +71,13 @@ const RegisterForm = () => {
                                 valid={mysweetform.errors.name}
                             />
 
+                            <FormInput
+                                model="password"
+                                type="password"
+                                label="Password"
+                                valid={mysweetform.errors.password}
+                            />
+
                             <Feild model="select">
                                 <select>
                                     <option value="">Select</option>
@@ -83,16 +85,10 @@ const RegisterForm = () => {
                                     <option value="Banana">Banana</option>
                                 </select>
                             </Feild>
-                            <Feild model="radio">
-                                <input type="radio" value="op1" />
-                            </Feild>
-
-                            <Feild model="check">
-                                <input type="checkbox" />
-                            </Feild>
-                            {mysweetform.errors.check
-                                ? 'fuck you check it!'
+                            {mysweetform.errors.select
+                                ? mysweetform.errors.select.message
                                 : ''}
+
                             <FormButton onClick={onSubmit} />
                         </div>
                     </Form>

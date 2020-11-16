@@ -7,22 +7,27 @@ export default {
     input: 'src/index.js',
     output: [
         {
-            file: pkg.main,
+            file: `cjs/${pkg.name}.min.js`,
             format: 'cjs',
-            sourcemap: true
+            sourcemap: true,
         },
         {
-            file: pkg.module,
+            file: `esm/${pkg.name}.min.js`,
             format: 'esm',
-            sourcemap: true
-        }
+            sourcemap: true,
+        },
+        {
+            file: `umd/${pkg.name}.min.js`,
+            format: 'umd',
+            sourcemap: true,
+        },
     ],
     plugins: [
         resolve(),
         babel({
-            exclude: 'node_modules/**'
+            exclude: 'node_modules/**',
         }),
-        commonjs()
+        commonjs(),
     ],
-    external: ['react', 'react-dom']
+    external: ['react', 'react-dom'],
 };

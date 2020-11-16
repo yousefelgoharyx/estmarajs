@@ -3903,6 +3903,11 @@ esrecurse@^4.1.0:
   dependencies:
     estraverse "^4.1.0"
 
+estmarajs@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/estmarajs/-/estmarajs-0.9.0.tgz#6cc31b970d05c873bad17a05b65c741472230bd0"
+  integrity sha512-roAl56DgTqw5V6mXiKMXO3LSOtv+Xtcgj8Yzb5yveEKXBltyW9eDag5uatszpPRgtXJTHotm+iBrdTGMlTMeXQ==
+
 estraverse@^4.0.0, estraverse@^4.1.0, estraverse@^4.1.1, estraverse@^4.2.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-4.3.0.tgz#398ad3f3c5a24948be7725e83d11a7de28cdbd1d"
